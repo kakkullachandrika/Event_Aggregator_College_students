@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CampusEvents</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'events/style.css' %}">
+</head>
+<body>
+
+<header>
+    <div class="logo">Campus<span>Events</span></div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/sports/">Sports</a>
+        <a href="/clubs/">Clubs</a>
+        <a href="/placements/">Placements</a>
+        <a href="/certifications/">Certifications</a>
+    </nav>
+</header>
+
+{% block content %}{% endblock %}
+
+<footer>
+    <p>© 2026 CampusEvents | For College Students</p>
+</footer>
+
+</body>
+</html>
