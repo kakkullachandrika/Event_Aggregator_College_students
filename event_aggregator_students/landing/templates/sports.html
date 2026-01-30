@@ -4,20 +4,165 @@
   <title>College Sports Events</title>
 </head>
 <body>
-  <h1>🏆 Sports Events</h1>
-    <div class="logo">Campus<span>Events</span></div>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/sports/">Sports</a>
-        <a href="/clubs/">Clubs</a>
-        <a href="/placements/">Placements</a>
-        <a href="/certifications/">Certifications</a>
-    </nav>
-  <ul>
-    <li>Inter-College Cricket Tournament</li>
-    <li>Football League</li>
-    <li>Badminton Championship</li>
-    <li>Annual Sports Meet</li>
-  </ul>
+
+{%  include 'header.html' %}
+
+<div class="container">
+<div class="section-title"><h2>Upcoming Sports Events</h2></div>
+
+<!-- Add Event Button -->
+<a class="add-event-btn" onclick="openAddEventModal()">+ Add Event</a>
+
+<div id="eventsContainer">
+<!-- Event cards dynamically added -->
+</div>
+</div>
+
+<!-- Add Event Modal -->
+<div class="modal" id="addEventModal">
+<div class="modal-content">
+<span class="close-btn" onclick="closeAddEventModal()">&times;</span>
+<h3>Add New Event</h3>
+<form id="addEventForm" onsubmit="submitNewEvent(event)">
+<label>Event Name:</label>
+<input type="text" id="newEventName" required>
+
+<label>Event Category:</label>
+<select id="newEventCategory" required>
+<option value="">--Select Category--</option>
+<option value="Football">Football</option>
+<option value="Cricket">Cricket</option>
+<option value="Athletics">Athletics</option>
+<option value="Basketball">Basketball</option>
+<option value="Volleyball">Volleyball</option>
+</select>
+
+<label>Date & Time:</label>
+<input type="datetime-local" id="newEventDateTime" required>
+
+<label>Venue:</label>
+<input type="text" id="newEventVenue" required>
+
+<label>Organizer:</label>
+<input type="text" id="newEventOrganizer" required>
+
+<label>Players per Team:</label>
+<input type="number" id="newEventPlayers" min="1" required>
+
+<label>Description:</label>
+<input type="text" id="newEventDescription" required>
+
+<label>Registration URL:</label>
+<input type="url" id="newEventURL" placeholder="Google Form URL" required>
+
+<button type="submit">Add Event</button>
+</form>
+</div>
+</div>
+<style>
+  
+body { font-family:'Roboto',sans-serif; margin:0; background:#f0f4f8; color:#333; }
+header h1 { margin:0; font-size:2rem; }
+.container { max-width: 1000px; margin:30px auto; padding:0 20px; }
+.section-title { text-align:center; margin-bottom:20px; }
+.section-title h2 { color:#004aad; font-size:1.8rem; }
+
+.add-event-btn { display:inline-block; background:#004aad; color:white; padding:10px 20px; border-radius:6px; margin-bottom:30px; cursor:pointer; transition:0.3s; }
+.add-event-btn:hover { background:#003080; }
+
+/* Event Cards */
+.event-card { border-radius:12px; margin-bottom:15px; overflow:hidden; transition: transform 0.2s, box-shadow 0.3s; cursor:pointer; }
+.event-card:hover { transform: scale(1.02); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+.event-header { padding:15px 20px; display:flex; justify-content:space-between; align-items:center; color:white; }
+.event-header h3 { margin:0; font-size:1.3rem; }
+.event-header span { background: rgba(255,255,255,0.3); padding:5px 10px; border-radius:20px; font-size:0.9rem; }
+.event-details { display:none; padding:15px 20px; background:#ffffff; font-size:0.95rem; border-top:2px solid #ddd; }
+.detail-row { margin-bottom:8px; }
+.detail-row strong { width:150px; display:inline-block; }
+.register-btn { display:inline-block; background:#28a745; color:white; padding:8px 15px; border-radius:5px; margin-top:10px; text-decoration:none; cursor:pointer; }
+.register-btn:hover { background:#1e7e34; }
+
+/* Modal */
+.modal { display:none; position:fixed; z-index:999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); overflow:auto; }
+.modal-content { background:white; margin:5% auto; padding:20px; border-radius:8px; width:90%; max-width:450px; position:relative;}
+.modal-content h3 { margin-top:0; color:#004aad; }
+.modal-content label { display:block; margin:10px 0 5px; }
+.modal-content input, .modal-content select { width:100%; padding:8px; border-radius:4px; border:1px solid #ccc; }
+.modal-content button { margin-top:15px; padding:10px 15px; background:#004aad; color:white; border:none; border-radius:5px; cursor:pointer; }
+.modal-content button:hover { background:#003080; }
+.close-btn { position:absolute; top:10px; right:15px; font-size:20px; cursor:pointer; color:#333; }
+
+
+</style>
+<script>
+// Events array
+let events = [];
+
+// Render events
+function renderEvents(){
+    const container = document.getElementById('eventsContainer');
+    container.innerHTML = '';
+    events.forEach((event, idx)=>{
+        const card = document.createElement('div');
+        card.className='event-card';
+        const colors = ['#ff6f61,#ffb347','#6a11cb,#2575fc','#f7971e,#ffd200','#43cea2,#185a9d','#ff416c,#ff4b2b'];
+        card.style.background=`linear-gradient(135deg, ${colors[idx%colors.length]})`;
+        card.innerHTML=`
+        <div class="event-header" onclick="toggleDetails(this.parentElement)">
+            <h3>${event.name}</h3>
+            <span>${event.category}</span>
+        </div>
+        <div class="event-details">
+            <div class="detail-row"><strong>Date & Time:</strong> ${new Date(event.dateTime).toLocaleString()}</div>
+            <div class="detail-row"><strong>Venue:</strong> ${event.venue}</div>
+            <div class="detail-row"><strong>Organizer:</strong> ${event.organizer}</div>
+            <div class="detail-row"><strong>Players per Team:</strong> ${event.players}</div>
+            <div class="detail-row"><strong>Description:</strong> ${event.description}</div>
+            <a class="register-btn" href="${event.url}" target="_blank">Register</a>
+        </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// Toggle card details
+function toggleDetails(card){
+    const details = card.querySelector('.event-details');
+    details.style.display = (details.style.display==='block')?'none':'block';
+}
+
+// Add Event modal functions
+function openAddEventModal(){ document.getElementById('addEventModal').style.display='block'; }
+function closeAddEventModal(){ document.getElementById('addEventModal').style.display='none'; }
+
+// Submit new event
+function submitNewEvent(e){
+    e.preventDefault();
+    const newEvent = {
+        name: document.getElementById('newEventName').value,
+        category: document.getElementById('newEventCategory').value,
+        dateTime: document.getElementById('newEventDateTime').value,
+        venue: document.getElementById('newEventVenue').value,
+        organizer: document.getElementById('newEventOrganizer').value,
+        players: document.getElementById('newEventPlayers').value,
+        description: document.getElementById('newEventDescription').value,
+        url: document.getElementById('newEventURL').value
+    };
+    events.push(newEvent);
+    renderEvents();
+    document.getElementById('addEventForm').reset();
+    closeAddEventModal();
+}
+
+// Close modal if clicking outside
+window.onclick = function(event){
+    const modal = document.getElementById('addEventModal');
+    if(event.target==modal) modal.style.display='none';
+}
+
+// Initial render
+renderEvents();
+</script>
+{%  include 'footer.html' %}
 </body>
 </html>
