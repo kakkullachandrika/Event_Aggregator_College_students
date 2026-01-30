@@ -1,23 +1,71 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Certifications</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>certifications</title>
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
 </head>
 <body>
- <h1>📜 Certifications</h1>
-    <div class="logo">Campus<span>Events</span></div>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/sports/">Sports</a>
-        <a href="/clubs/">Clubs</a>
-        <a href="/placements/">Placements</a>
-        <a href="/certifications/">Certifications</a>
-    </nav>
-<ul>
-    <li>Python Certification</li>
-    <li>Data Analytics Certification</li>
-    <li>AWS Cloud Certification</li>
-    <li>Cyber Security Certification</li>
-  </ul>
+    <div class="page">
+        {% include 'header.html' %}
+
+        <main class="main-content">
+            <h1 style="text-align: center; margin-top: 30px;">Certification events</h1>
+            <!-- Button -->
+            <button onclick="showForm()">Add Certifications</button>
+
+            <!-- Form -->
+            <div class="form-container" id="eventForm">
+                <form method="post">
+                {% csrf_token %}
+                    <label>Event Name</label>
+                    <input type="text" placeholder="Enter event name"  name="event_name " required>
+
+                    <label >Event Category</label>
+                    <input type="text" placeholder="Enter event category" name="event_category" required>
+
+                    <label>Date & Time</label>
+                    <input type="datetime-local" name="date_and_time" required>
+
+                    <label>Venue</label>
+                    <input type="text" placeholder="Enter venue" name="venue"  required>
+
+                    <label>Organizer</label>
+                    <input type="text" placeholder="Enter organizer name"name="organizer" required>
+
+                    <label>Registration Link</label>
+                    <input type="url" placeholder="Enter registration link" required name="registration_link">
+
+                    <button type="submit" class="submit-btn">Submit Event</button>
+                </form>
+            </div>
+
+            <script>
+                function showForm() {
+                    document.getElementById("eventForm").style.display = "block";
+                }
+            </script>
+        </main>
+         <div class="events">
+        <div class="event-grid">
+            {% for i in certifications %}
+                <div class="event-card">
+                    <h3>{{ i.event_name }}</h3>
+                    <p><strong>Category:</strong> {{ i.event_category }}</p>
+                    <p><strong>Date & Time:</strong> {{ i.date_and_time }}</p>
+                    <p><strong>Venue:</strong> {{ i.venue }}</p>
+                    <p><strong>Organizer:</strong> {{ i.organizer }}</p>
+                    <a href="{{ i.registration_link }}" target="_blank" class="reg-link">Register Here</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    </div>
+   
+      {% include 'footer.html' %}
+
 </body>
 </html>
