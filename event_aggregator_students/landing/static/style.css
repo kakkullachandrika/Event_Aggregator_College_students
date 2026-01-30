@@ -131,7 +131,374 @@ nav a {
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 20px 0;
   background: #111827;
-  color: white;
+  color: white;   
+  margin-top: 118px;
+    }
+    .college-footer {
+  background: #0f172a;
+  color: #ffffff;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+.footer-content h3 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.footer-content p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  margin-bottom: 20px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+.social-icons i {
+  color: #ffffff;        /* FORCE icon color */
+  font-size: 18px;
+}
+
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  background: #1e293b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background: #38bdf8;
+  transform: translateY(-4px);
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+}
+.page {
+  min-height: 100vh;       /* full screen height */
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;                 /* pushes footer down */
+}
+
+.category-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px;
+}
+
+/* COMMON CARD STYLE */
+.category-card {
+    width: 260px;
+    height: 120px;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+.category-card h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.category-card p {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* COLORS EXACT LIKE IMAGE */
+.sports {
+    background: #0d6efd;
+}
+
+.certifications {
+    background: #ffc107;
+    color: #000;
+}
+
+.clubs {
+    background: #dc3545;
+}
+
+.placements {
+    background: #17c1e8;
+}
+/* DASHBOARD */
+.dashboard-container {
+    padding: 50px;
+    text-align: center;
+}
+
+.dashboard-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #222;
+}
+
+.dashboard-subtitle {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+/* GRID */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
+.dashboard-card {
+    height: 170px;
+    border-radius: 15px;
+    padding: 25px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.25);
+}
+
+.dashboard-card h2 {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.dashboard-card p {
+    margin-top: 8px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* ICON */
+.icon {
+    font-size: 42px;
+}
+
+/* COLORS */
+.dashboard-card.sports {
+    background: linear-gradient(135deg, #0d6efd, #084298);
+}
+
+.dashboard-card.clubs {
+    background: linear-gradient(135deg, #dc3545, #842029);
+}
+
+.dashboard-card.placements {
+    background: linear-gradient(135deg, #17c1e8, #0a8ca8);
+}
+
+.dashboard-card.certifications {
+    background: linear-gradient(135deg, #ffc107, #d39e00);
+    color: #000;
+}
+/* UPCOMING EVENT */
+.upcoming-section {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.upcoming-title {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+.upcoming-card {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+}
+
+.upcoming-card:hover {
+    transform: translateY(-5px);
+}
+
+.upcoming-card h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.upcoming-card .category {
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+.upcoming-card .description {
+    margin-top: 12px;
+    color: #555;
+}
+
+.view-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #0d6efd;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.view-btn:hover {
+    background: #084298;
+}
+
+.no-event {
+    color: #777;
+}
+/* HEADER */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    background: white;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #0d6efd;
+}
+
+nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+nav a.active {
+    color: #0d6efd;
+}
+
+/* FORM SECTION */
+.form-section {
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f6f9;
+}
+
+.form-card {
+    background: white;
+    padding: 35px;
+    width: 420px;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.form-card h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #0d6efd, #084298);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+.main-footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* marquee */
+    .section-title {
+      text-align: center;
+      margin: 50px 0 50px 0;
+      font-size: 2rem;
+      color:black;
+
+    }
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+    /* Hover effect for cards and guru images */
+.card img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card img:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
