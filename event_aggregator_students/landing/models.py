@@ -16,3 +16,5 @@ class Club(models.Model):
     venue=models.CharField()
     organizer=models.CharField()
     registration_link=models.CharField()
+def __str__(self):
+    return self.title
