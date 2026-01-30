@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <title>CampusEvents</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'events/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer">
+
 </head>
 <body>
-
 <header>
     <div class="logo">Campus<span>Events</span></div>
     <nav>
@@ -19,12 +23,183 @@
         <a href="/certifications/">Certifications</a>
     </nav>
 </header>
+{% block content %}
 
-{% block content %}{% endblock %}
+<div class="dashboard-container">
 
-<footer>
-    <p>© 2026 CampusEvents | For College Students</p>
+    <h1 class="dashboard-title">Campus Events Dashboard</h1>
+    <p class="dashboard-subtitle">Explore upcoming events across your campus</p>
+
+    <div class="dashboard-grid">
+
+        <a href="{% url 'sports' %}" class="dashboard-card sports">
+            <div class="icon">🏆</div>
+            <h2>Sports</h2>
+            <p>{{ sports_count }} Events</p>
+        </a>
+
+        <a href="{% url 'clubs' %}" class="dashboard-card clubs">
+            <div class="icon">🎭</div>
+            <h2>Clubs</h2>
+            <p>{{ clubs_count }} Events</p>
+        </a>
+
+        <a href="{% url 'placements' %}" class="dashboard-card placements">
+            <div class="icon">💼</div>
+            <h2>Placements</h2>
+            <p>{{ placements_count }} Events</p>
+        </a>
+
+        <a href="{% url 'certifications' %}" class="dashboard-card certifications">
+            <div class="icon">📜</div>
+            <h2>Certifications</h2>
+            <p>{{ certifications_count }} Events</p>
+        </a>
+
+    </div>
+    
+    <div class="upcoming-section">
+        <h2 class="upcoming-title">📢 Upcoming Event</h2>
+
+        {% if upcoming_event %}
+        <div class="upcoming-card">
+            <h3>{{ upcoming_event.title }}</h3>
+            <p class="category">{{ upcoming_event.category }}</p>
+            <p><b>Date:</b> {{ upcoming_event.date }}</p>
+            <p class="description">{{ upcoming_event.description|truncatewords:20 }}</p>
+            <a href="#" class="view-btn">View Details</a>
+        </div>
+        {% else %}
+        <p class="no-event">No upcoming events</p>
+        {% endif %}
+    </div>
+
+</div>
+<!-- Section with Marquee -->
+<section id="highlights" class="container my-5">
+  <h2 class="section-title">🎉Event Highlights</h2>
+
+  <marquee behavior="scroll" direction="left" scrollamount="10" width="95%">
+    <div style="display: flex; gap: 30px;">
+
+    <!-- Sports -->
+<div class="card" style="width: 320px; min-width: 320px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+    <a href=" https://youtu.be/JWhA3ldZcyY">
+    <img src="{% static 'images/sports_cricket.jpg' %}"
+       class="card-img-top"
+       alt="Sports"
+       style="width: 100%; height: 220px; object-fit: cover;">
+  </a>
+  <div class="card-body" style="padding: 15px; background: white;">
+    <h5 class="card-title">Sports</h5>
+    <p class="card-text" style="margin: 0; color: #333;">
+      Sports build strength and teamwork🏅
+    </p>
+  </div>
+</div>
+
+<!-- certifications -->
+<div class="card" style="width: 320px; min-width: 320px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+  <a href="https://youtu.be/X9G1680Kc7o ">
+    
+    <img src="{% static 'images/certifications.jpg' %}"
+       class="card-img-top"
+       alt="Certifications"
+       style="width: 100%; height: 220px; object-fit: cover;">
+  </a>
+  <div class="card-body" style="padding: 15px; background: white;">
+    <h5 class="card-title">Certification</h5>
+    <p class="card-text" style="margin: 0; color: #333;">
+      A step toward professional mastery
+    </p>
+  </div>
+</div>
+        <!-- Training -->
+         <div class="card" style="width: 320px; min-width: 320px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+    <a href=" https://youtu.be/JWhA3ldZcyY">
+    <img src="{% static 'images/training.jpeg' %}"
+       class="card-img-top"
+       alt="Training"
+       style="width: 100%; height: 220px; object-fit: cover;">
+  </a>
+  <div class="card-body" style="padding: 15px; background: white;">
+    <h5 class="card-title">Training</h5>
+    <p class="card-text" style="margin: 0; color: #333;">
+      Learning today,Leading tomorrow.
+    </p>
+  </div>
+</div>
+<!-- Placements -->
+<div class="card" style="width: 320px; min-width: 320px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+  <a href="https://youtu.be/ko5sKNuSLbs ">
+    <img src="{% static 'images/placements.jpeg' %}"
+       class="card-img-top"
+       alt="Placement"
+       style="width: 100%; height: 220px; object-fit: cover;">
+  </a>
+  <div class="card-body" style="padding: 15px; background: white;">
+    <h5 class="card-title">Placements</h5>
+    <p class="card-text" style="margin: 0; color: #333;">
+      Pathway to professional success.
+    </p>
+  </div>
+</div>
+<!-- Event -->
+<div class="card" style="width: 320px; min-width: 320px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+  <a href=" https://youtu.be/-tAmSrLGAYM">
+    <img src="{% static 'images/event.jpg' %}"
+    class="card-img-top"
+       alt="clg_event"
+       style="width: 100%; height: 220px; object-fit: cover;">
+  </a>
+  <div class="card-body" style="padding: 15px; background: white;">
+    <h5 class="card-title">Bathukamma-event</h5>
+    <p class="card-text" style="margin: 0; color: #333;">Celebrating moments, creating memories 🎉
+    </p>
+  </div>
+</div>
+<!-- clubs -->
+<div class="card" style="width: 320px; min-width: 320px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+  <a href="https://youtu.be/WYslsvUfI40">
+    <img src="{% static 'images/clubs.jpg' %}"
+    class="card-img-top"
+       alt="Kathakali"
+       style="width: 100%; height: 220px; object-fit: cover;">
+  </a>
+  <div class="card-body" style="padding: 15px; background: white;">
+    <h5 class="card-title">Clubs</h5>
+    <p class="card-text" style="margin: 0; color: #333;">
+      Clubs that shaped leadership.
+    </p>
+  </div>
+</div>
+    </div>
+  </marquee>
+</section>
+
+{% endblock %}
+
+<footer class="college-footer">
+  <div class="footer-content">
+    <h3>Sphoorthy Engineering College</h3>
+    <p>Empowering Education • Inspiring Innovation</p>
+    <div class="social-icons">
+  <a href="{% url 'facebook' %}" aria-label="Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="{% url 'instagram' %}" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="{% url 'twitter' %}" aria-label="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+  <a href="{% url 'whatsapp' %}" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+    <p class="copyright">&copy; 2026 CampusEvents | For College Students</p>
+  </div>
 </footer>
-
 </body>
 </html>
